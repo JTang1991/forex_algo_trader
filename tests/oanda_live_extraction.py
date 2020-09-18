@@ -73,3 +73,39 @@ def oanda_api_acct_info(vAccountID, vToken):
     response_data = pd.jsons_normalize(response_json)
 
     return response_data
+
+
+
+################################################################################################################
+## Oanda API Live Account Details Call Function
+## --------------------------------------------
+## Fuction will call the Oanda v20 API function the latest image of the FX Trading Account
+## The function will return a pandas dataframe with a peak and valley signal
+################################################################################################################
+token = 'ab76634af1721b2f72a277a400a63ef5-1d702d9778da8a0bda76a049a31aea6e'
+client = oandapyV20.API(access_token=token)
+mo = MarketOrderRequest(instrument="EUR_USD", units=10000)
+print(json.dumps(mo.data, indent=4)) 
+
+r = orders.OrderCreate(accountID, data=mo.data) 
+rv = client.request(r)
+print(rv)
+print(json.dumps(rv, indent=4)) 
+
+
+
+import json
+from oandapyV20 import API
+import oandapyV20.endpoints.positions as positions
+from oandapyV20.contrib.requests import PositionCloseRequest
+
+token = 'ab76634af1721b2f72a277a400a63ef5-1d702d9778da8a0bda76a049a31aea6e'
+client = oandapyV20.API(access_token=token)
+
+ordr = PositionCloseRequest(longUnits=10000)
+print(json.dumps(ordr.data, indent=4))
+
+
+r = positions.PositionClose(accountID, instrument="EUR_USD",data=ordr.data)
+rv = client.request(r)
+print(rv) 

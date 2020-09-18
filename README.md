@@ -19,6 +19,7 @@ forex_algo_trader
 |-- forex_algo_trader/
 |   |-- __init__.py
 |   |-- algo_runner.py
+|   |-- surveillance_runner.py
 |
 |   |   config/
 |   |   |-- __init__.py
@@ -38,7 +39,7 @@ forex_algo_trader
 |   |   |-- harmonic_signals.py
 |   |   |-- technical_signals.py
 |
-|   |   orders/
+|   |   execution/
 |   |   |-- __init__.py
 |   |   |-- oanda_api_functions.py
 |
@@ -48,17 +49,16 @@ forex_algo_trader
 |   |   |-- risk_triggers.py
 |   |   |-- kill_function.py
 |
-|   |   backtester/
-|   |   |-- __init__.py
-|   |   |-- harmonic_signals.py
-|   |   |-- technical_signals.py
-|   |   |-- pl_calculator.py
 
 |-- notebooks/
 
 |-- tests/
 |   |-- __init__.py
 |   |-- oanda_historical_extraction.py
+|   |-- harmonic_signals.py
+|   |-- technical_signals.py
+|   |-- pl_calculator.py
+
 
 |-- LICENSE
 |-- README.md
