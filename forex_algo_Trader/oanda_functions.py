@@ -116,6 +116,7 @@ def oanda_close_position_request(vAccountID, vToken, vInstrument, vUnits):
     ordr = PositionCloseRequest(longUnits=int(vUnits)) if int(vUnits) >=0 else PositionCloseRequest(shortUnits=int(vUnits))
     r = positions.PositionClose(vAccountID, instrument=vInstrument,data=ordr.data)
     rv = client.request(r)
+    vExecutionTime = time.strftime("%Y%m%d_%H%M%S")
 
     close_order = pd.json_normalize(ordr.data)
     transaction = pd.json_normalize(rv)
