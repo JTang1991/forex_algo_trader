@@ -1,5 +1,5 @@
 ####################################################################################################################################################################
-##-- Script Description : Get Live FX Prices for M1 and above timeframes
+##-- Script Description : Oanda Functions for API calls and Order Execution 
 ##-- Sources            : 
 ##-- Created            : Sep 2020 
 ##-- Author             : Jason TANG
@@ -12,7 +12,7 @@
 ## Python Libraries
 ################################################################################################################
 ## Common Libraries
-import numpy as np, pandas as pd, os, json
+import numpy as np, pandas as pd, os, json, sys, logging, pkg_resources
 
 ## Oanda Libraries
 import oandapyV20
@@ -26,12 +26,8 @@ import oandapyV20.endpoints.positions as positions
 from oandapyV20.contrib.requests import PositionCloseRequest
 from oandapyV20.contrib.requests import MarketOrderRequest
 
-
-################################################################################################################
-## Variables and Paths
-################################################################################################################
-token = 'ab76634af1721b2f72a277a400a63ef5-1d702d9778da8a0bda76a049a31aea6e'
-accountID = '101-004-16285502-001'
+## Config
+from master_config import *
 
 
 ################################################################################################################
@@ -60,10 +56,9 @@ def oanda_api_live_call(vPair, vTimeframe, vToken, vCount = 5000):
 
 
 ################################################################################################################
-## Oanda API Live Account Details Call Function
-## --------------------------------------------
+## Oanda API Account Details Call Function
+## ---------------------------------------
 ## Fuction will call the Oanda v20 API function the latest image of the FX Trading Account
-## The function will return a pandas dataframe with a peak and valley signal
 ################################################################################################################
 def oanda_api_acct_info(vAccountID, vToken):
     client = oandapyV20.API(access_token=vToken)
@@ -73,3 +68,24 @@ def oanda_api_acct_info(vAccountID, vToken):
     response_data = pd.jsons_normalize(response_json)
 
     return response_data
+
+
+
+################################################################################################################
+## Oanda Market Order API Execute Function
+## ---------------------------------------
+## Fuction execute spot market order request with define instrument, units, TP, SL or TSL
+## Execution Order and the Successful Order JSON will be captured and store into the Orders Folder
+################################################################################################################
+def oanda_market_order_request(vAccountID, vToken, vInstrument, vUnits, vTakeProfit, vStopLoss, vTrailingStopLoss):
+    client = oandapyV20.API(access_token=vToken)
+    mo = MarketOrderRequest(instrument=vInstrument, units=vUnits)
+    r = orders.OrderCreate(vAccountID, data=mo.data)
+    rv = client.request(r)
+    
+print(json.dumps(mo.data, indent=4)) 
+
+r = orders.OrderCreate(accountID, data=mo.data) 
+rv = client.request(r)
+print(rv)
+print(json.dumps(rv, indent=4)) 
