@@ -204,7 +204,7 @@ def harmonic_signal_backtester(vDataframe, vErrorAllowed = 5.0, vPlot = False):
 ## a possible harmonic pattern and alert the user to initiate a trade.
 ## The function will reutnr a pandas dataframe with the Signal to Long or Short and the Pattern signalled.
 ################################################################################################################
-def harmonic_signal_live_trder(vDataframe, vErrorAllowed = 5.0, vPlot = False):
+def harmonic_signal_live_trder(vDataframe, vErrorAllowed = 5.0):
     pattern = vDataframe[vDataframe['Peak_Valley'].notnull()].tail(5)
 
     if pattern.shape[0] < 4:
@@ -240,56 +240,45 @@ def harmonic_signal_live_trder(vDataframe, vErrorAllowed = 5.0, vPlot = False):
     if XA > 0 and AB < 0 and BC > 0 and CD < 0:
         if AB_range_gart[0] < abs(AB) < AB_range_gart[1] and BC_range_gart[0] < abs(BC) < BC_range_gart[1] and CD_range_gart[0] < abs(CD) < CD_range_gart[1]:
             print('Bull Gartley at date : ' + str(pattern['Date'][4]))
-            if pattern['Date'][4] == max(vDataframe['Date']) + pd.DateOffset(-1):
+            if (pattern['Date'][4] == vDataframe.loc[len(vDataframe)-2,'Date']) | (pattern['Date'][4] == vDataframe.loc[len(vDataframe)-1,'Date']):
                 signals.append(['Long','Gartley',pattern['Date'][0],pattern['Date'][1],pattern['Date'][2],pattern['Date'][3],pattern['Date'][4],pattern['Value'][0],pattern['Value'][1],pattern['Value'][2],pattern['Value'][3],pattern['Value'][4]])
             
         elif AB_range_but[0] < abs(AB) < AB_range_but[1] and BC_range_but[0] < abs(BC) < BC_range_but[1] and CD_range_but[0] < abs(CD) < CD_range_but[1]:
             print('Bull Butterfly at date : ' + str(pattern['Date'][4]))
-            if pattern['Date'][4] == max(vDataframe['Date']) + pd.DateOffset(-1):
+            if (pattern['Date'][4] == vDataframe.loc[len(vDataframe)-2,'Date']) | (pattern['Date'][4] == vDataframe.loc[len(vDataframe)-1,'Date']):
                 signals.append(['Long','Butterfly',pattern['Date'][0],pattern['Date'][1],pattern['Date'][2],pattern['Date'][3],pattern['Date'][4],pattern['Value'][0],pattern['Value'][1],pattern['Value'][2],pattern['Value'][3],pattern['Value'][4]])
             
         elif AB_range_bat[0] < abs(AB) < AB_range_bat[1] and BC_range_bat[0] < abs(BC) < BC_range_bat[1] and CD_range_bat[0] < abs(CD) < CD_range_bat[1]:
             print('Bull Bat at date : ' + str(pattern['Date'][4]))
-            if pattern['Date'][4] == max(vDataframe['Date']) + pd.DateOffset(-1):
+            if (pattern['Date'][4] == vDataframe.loc[len(vDataframe)-2,'Date']) | (pattern['Date'][4] == vDataframe.loc[len(vDataframe)-1,'Date']):
                 signals.append(['Long','Bat',pattern['Date'][0],pattern['Date'][1],pattern['Date'][2],pattern['Date'][3],pattern['Date'][4],pattern['Value'][0],pattern['Value'][1],pattern['Value'][2],pattern['Value'][3],pattern['Value'][4]])
             
         elif AB_range_crab[0] < abs(AB) < AB_range_crab[1] and BC_range_crab[0] < abs(BC) < BC_range_crab[1] and CD_range_crab[0] < abs(CD) < CD_range_crab[1]:
             print('Bull Crab at date : ' + str(pattern['Date'][4]))
-            if pattern['Date'][4] == max(vDataframe['Date']) + pd.DateOffset(-1):
+            if (pattern['Date'][4] == vDataframe.loc[len(vDataframe)-2,'Date']) | (pattern['Date'][4] == vDataframe.loc[len(vDataframe)-1,'Date']):
                 signals.append(['Long','Crab',pattern['Date'][0],pattern['Date'][1],pattern['Date'][2],pattern['Date'][3],pattern['Date'][4],pattern['Value'][0],pattern['Value'][1],pattern['Value'][2],pattern['Value'][3],pattern['Value'][4]])
             
     if XA < 0 and AB > 0 and BC < 0 and CD > 0:
         if AB_range_gart[0] < abs(AB) < AB_range_gart[1] and BC_range_gart[0] < abs(BC) < BC_range_gart[1] and CD_range_gart[0] < abs(CD) < CD_range_gart[1]:
             print('Bear Gartley at date : ' + str(pattern['Date'][4]))
-            if pattern['Date'][4] == max(vDataframe['Date']) + pd.DateOffset(-1):
+            if (pattern['Date'][4] == vDataframe.loc[len(vDataframe)-2,'Date']) | (pattern['Date'][4] == vDataframe.loc[len(vDataframe)-1,'Date']):
                 signals.append(['Short','Gartley',pattern['Date'][0],pattern['Date'][1],pattern['Date'][2],pattern['Date'][3],pattern['Date'][4],pattern['Value'][0],pattern['Value'][1],pattern['Value'][2],pattern['Value'][3],pattern['Value'][4]])
             
         elif AB_range_but[0] < abs(AB) < AB_range_but[1] and BC_range_but[0] < abs(BC) < BC_range_but[1] and CD_range_but[0] < abs(CD) < CD_range_but[1]:
             print('Bear Butterfly at date : ' + str(pattern['Date'][4]))
-            if pattern['Date'][4] == max(vDataframe['Date']) + pd.DateOffset(-1):
+            if (pattern['Date'][4] == vDataframe.loc[len(vDataframe)-2,'Date']) | (pattern['Date'][4] == vDataframe.loc[len(vDataframe)-1,'Date']):
                 signals.append(['Short','Butterfly',pattern['Date'][0],pattern['Date'][1],pattern['Date'][2],pattern['Date'][3],pattern['Date'][4],pattern['Value'][0],pattern['Value'][1],pattern['Value'][2],pattern['Value'][3],pattern['Value'][4]])
             
         elif AB_range_bat[0] < abs(AB) < AB_range_bat[1] and BC_range_bat[0] < abs(BC) < BC_range_bat[1] and CD_range_bat[0] < abs(CD) < CD_range_bat[1]:
             print('Bear Bat at date : ' + str(pattern['Date'][4]))
-            if pattern['Date'][4] == max(vDataframe['Date']) + pd.DateOffset(-1):
+            if (pattern['Date'][4] == vDataframe.loc[len(vDataframe)-2,'Date']) | (pattern['Date'][4] == vDataframe.loc[len(vDataframe)-1,'Date']):
                 signals.append(['Short','Bat',pattern['Date'][0],pattern['Date'][1],pattern['Date'][2],pattern['Date'][3],pattern['Date'][4],pattern['Value'][0],pattern['Value'][1],pattern['Value'][2],pattern['Value'][3],pattern['Value'][4]])
             
         elif AB_range_crab[0] < abs(AB) < AB_range_crab[1] and BC_range_crab[0] < abs(BC) < BC_range_crab[1] and CD_range_crab[0] < abs(CD) < CD_range_crab[1]:
             print('Bear Crab at date : ' + str(pattern['Date'][4]))
-            if pattern['Date'][4] == max(vDataframe['Date']) + pd.DateOffset(-1):
+            if (pattern['Date'][4] == vDataframe.loc[len(vDataframe)-2,'Date']) | (pattern['Date'][4] == vDataframe.loc[len(vDataframe)-1,'Date']):
                 signals.append(['Short','Crab',pattern['Date'][0],pattern['Date'][1],pattern['Date'][2],pattern['Date'][3],pattern['Date'][4],pattern['Value'][0],pattern['Value'][1],pattern['Value'][2],pattern['Value'][3],pattern['Value'][4]])
             
-    if signals != []:
-        signals_df = pd.DataFrame(signals, columns = ['Signal','Pattern','X_Date','A_Date','B_Date','C_Date','D_Date','X_Value','A_Value','B_Value','C_Value','D_Value'])
-        signals_df['Entry_Date'] = max(vDataframe['Date'])
-        if vPlot == True:
-            plt.figure(figsize = (20,10))
-            plt.plot(vDataframe.Close[pattern['index'][0] : pattern['index'][4] + 150])
-            plt.plot(vDataframe.Value[pattern['index'][0] : pattern['index'][4] + 150], linestyle = '--')
-            plt.scatter(vDataframe[pattern['index'][0] : pattern['index'][4] + 1][vDataframe['Peak_Valley'] == 'Peak'].index.to_list(), vDataframe[pattern['index'][0] : pattern['index'][4] + 1][vDataframe['Peak_Valley'] == 'Peak'].Close.values.tolist(), color = 'green')
-            plt.scatter(vDataframe[pattern['index'][0] : pattern['index'][4] + 1][vDataframe['Peak_Valley'] == 'Valley'].index.to_list(), vDataframe[pattern['index'][0] : pattern['index'][4] + 1][vDataframe['Peak_Valley'] == 'Valley'].Close.values.tolist(), color = 'red')
-            plt.plot(vDataframe[pattern['index'][0] : pattern['index'][4] + 1][vDataframe['Peak_Valley'].notnull()].index.to_list(), vDataframe[pattern['index'][0] : pattern['index'][4] + 1][vDataframe['Peak_Valley'].notnull()].Close.values.tolist(), linestyle = '--', color = 'black')
-            plt.show()
     else:
         print('No visable pattern')
         signals_df = []
