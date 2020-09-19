@@ -13,7 +13,8 @@
 ################################################################################################################
 import sys, os, logging, time
 import pandas as pd
-from config import global_config, account_config
+from config.global_config import vLogPath, vOrdersPath, vRatesPath
+from config.account_config import vAccountID,vAPIToken
 from execution import oanda_api_functions
 from signals import harmonic_signals
 

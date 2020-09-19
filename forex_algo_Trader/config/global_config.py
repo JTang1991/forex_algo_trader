@@ -20,6 +20,7 @@ import os, sys, logging
 ## Variables and Paths
 ################################################################################################################
 vRootPath = os.getcwd()
+vScriptPath = vRootPath + '/scripts'
 vLogPath = vRootPath + '/log'
 vRatesPath = vRootPath + '/FX_Rates'
 vOrdersPath = vRootPath + '/Orders'
